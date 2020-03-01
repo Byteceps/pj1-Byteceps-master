@@ -169,6 +169,7 @@ namespace freq {
     return D->numEntries;
   }
 
+
   // totalCount(D):
   //
   // Gives back the total of the counts of all the entries in `D`.
@@ -177,6 +178,61 @@ namespace freq {
     return D->numIncrements;
   }
 
+
+
+//Returns length of a bucket entry linked list 
+int length (bucket* b){
+  if (b->first == nullptr){
+    return 0;
+  }
+  int count = 0;
+  entry* current = b->first;
+  while (current != nullptr){
+    count++;
+    current = current->next;
+  }
+  return count;
+}
+
+  // increment(D,w):
+  //
+  // Adds one to the count associated with string `k` in `D`, possibly
+  // creating a new entry.
+  //
+
+  void increment(dict* D, std::string k) {
+    int hash = hashValue(k, D->numBuckets); //Correct index for k's bucket
+  
+    bucket* theBucket = &D->buckets[hash]; //Pointer to correct bucket
+
+    //If the bucket is not empty
+    if (theBucket->first !=nullptr){
+
+      int bucketLength = length(theBucket);
+      entry* current = theBucket->first;
+      //Transverse through entry list to see if key has an entry
+      //Increment that entry's count if found
+      while (current != nullptr){
+        if(current->word == k){
+          current->count+= 1;
+          return;
+        }
+        else{
+          current = current->next;
+        }
+      }
+    }
+
+    //If the bucket is empty, create new entry for k
+    else {
+      entry* newEntry = theBucket->first;
+      newEntry->word = k;
+      newEntry->count = 1;
+      newEntry->next = nullptr;
+      theBucket->first = newEntry;
+    }
+  }
+  
 
   // getCount(D,w):
   //
@@ -197,15 +253,6 @@ namespace freq {
     return;
   }
 
-  // increment(D,w):
-  //
-  // Adds one to the count associated with word `w` in `D`, possibly
-  // creating a new entry.
-  //
-  void increment(dict* D, std::string w) {
-    // UNIMPLEMENTED
-    return;
-  }
 
   // dumpAndDestroy(D):
   //
