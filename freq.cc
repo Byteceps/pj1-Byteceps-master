@@ -208,7 +208,6 @@ int length (bucket* b){
     //If the bucket is not empty
     if (theBucket->first !=nullptr){
 
-      int bucketLength = length(theBucket);
       entry* current = theBucket->first;
       //Transverse through entry list to see if key has an entry
       //Increment that entry's count if found
@@ -236,12 +235,54 @@ int length (bucket* b){
 
   // getCount(D,w):
   //
-  // Gets the count associated with the word `w` in `D`.
+  // Gets the count associated with the word `k` in `D`.
   //
-  int getCount(dict* D, std::string w) {
-    // UNIMPLEMENTED
-    return 0;
+  int getCount(dict* D, std::string k) {
+    int hash = hashValue(k, D->numBuckets); //Correct index for k's bucket
+    bucket* theBucket = &D->buckets[hash]; //Pointer to correct bucket
+
+
+    //If bucket is not empty
+    if (theBucket->first != nullptr){
+
+      //Transverse through entry list to see if key has an entry and return its count
+      entry* current = theBucket->first;
+      while (current != nullptr){
+        if (current->word == k){
+          return current->count;
+        }
+        else{
+          current = current->next;
+        }
+        return 0;
+      }
+    }
+    //Return 0 if bucket is empty  
+    else {
+      return 0;
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // rehash(D):
   //
