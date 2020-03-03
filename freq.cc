@@ -262,35 +262,14 @@ int length (bucket* b){
       return 0;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
   // rehash(D):
   //
   // Roughly doubles the hash table of `D` and places its entries into
   // that new structure.
   //
   void rehash(dict* D) {
-    // UNIMPLEMENTED
+    
     return;
   }
 
@@ -301,20 +280,98 @@ int length (bucket* b){
   // most to least frequent.
   //
   // Deletes all the heap-allocated components of `D`.
-  //
-  entry* dumpAndDestroy(dict* D) {
-    // UNIMPLEMENTED
-    entry* es = new entry[3];
-    es[0].word = "hello";
-    es[0].count = 0;
-    es[0].next = nullptr;
-    es[1].word = "world";
-    es[1].count = 1;
-    es[1].next = nullptr;
-    es[2].word = "!";
-    es[2].count = 2;
-    es[2].next = nullptr;
-    return es;
+  // //Transverse entry list with two consecutive pointers
+        
+  entry* dumpAndDestroy(dict* D, int sizep) {
+    //Create new array of entries
+    entry* newArr = new entry[D->numBuckets];
+
+      //Iterate over buckets,     
+      for (int i = 0; i < D->numBuckets; i++){
+        bucket* theBucket = &D->buckets[i];
+        entry* firstEntry = theBucket->first;
+
+        //If the bucket is not empty
+        if (firstEntry != nullptr){
+
+          entry* current = firstEntry;
+          while (current->next != nullptr){
+            
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          if (firstEntry->next == nullptr){
+            //Case when bucket has one entry
+            newArr[i].word = firstEntry->word;
+            newArr[i].count = firstEntry->count;
+            newArr[i].next = nullptr;
+            //Add heap delete
+            
+          }
+
+          //Transverse entry list with two consecutive pointers
+          entry* follower = firstEntry;
+          entry* leader = firstEntry->next;
+          if (leader->next == nullptr) {
+            //If entry list has two entries
+
+            //Transfer first entry
+            newArr[i].word = follower->word;
+            newArr[i].count = follower->count;
+            newArr[i].next = follower->next;
+            //Transfer second entry
+            newArr[i].next->word = leader->word;
+            newArr[i].next->count = leader->count;
+            newArr[i].next->next = nullptr;
+          }
+
+          while (leader->next != nullptr) {
+            newArr[i] = follower
+
+
+            }
+
+
+          
+
+
+          
+
+            
+
+            }
+
+          
+          
+            
+          }
+        
+
+
+        }
+
+
+      }
+
+    
+
   }
 } // end namespace freq
 

@@ -47,8 +47,7 @@ namespace freq {
 
     bucket* buckets;   // An array of buckets, indexed by the hash function.
 
-    int numIncrements; // Total count over all entries. Number of `increment` calls.
-
+    int numIncrements; // Total count over all entries. Number of `i
     int numBuckets;    // The array is indexed from 0 to numBuckets.
 
     int numEntries;    // The total number of entries in the whole
